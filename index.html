@@ -14,7 +14,19 @@
         justify-content: center;
         align-items: top;
         height: 60vh;
-        border: 1px solid black;
+        border: 2px solid black;
+        border-radius: 15px;
+        flex-direction: column;
+        gap: 1em;
+      }
+
+      #questions {
+        margin-right: 1em;
+      }
+
+      #next_btn {
+        width: 15em;
+        margin-right: 1em;
       }
     </style>
     <script type="text/javascript" src="questions.js" defer></script>
@@ -26,6 +38,7 @@
     <div class="quiz-container">
       <div id="questions">
       </div>
+      <input type="button" value="بعدی" id="next_btn">
     </div> <!-- end of quiz-continer -->
   </body>
 </html>
