@@ -72,12 +72,17 @@ function calculateScore(selectedValue, correctAnswer) {
     score += 1
 }
 
+function showTestResult() {}
+
 // event handler when user clicked on nextButton in the html page
 function onNextButton(questionsDiv, questions) {
   const options = questionsDiv.querySelectorAll(".option");
   const selectedValue = getSelectedValue(options);
   const correctAnswer = getCorrectAnswer();
+
+  // Determine user score based on the answer
   calculateScore(selectedValue, correctAnswer);
+
   // if there is question show next question
   if (questionIndex < questionObjects.length){
     showNextQuestion(questionsDiv, questions);
@@ -94,7 +99,26 @@ function main() {
   const questions = createAllQuestions();
   const questionsDiv = document.getElementById("questions");
   const nextButton = document.getElementById("next-button");
+
+  // Show first question
   showNextQuestion(questionsDiv, questions);
+
+  // Disable next button
+  nextButton.disabled = true;
+
+  // Enable if an option choiced. Should be after showNextQuestion.
+  // There must be a question with options to add event to the options.
+  const options = questionsDiv.querySelectorAll(".option");
+
+  // If any option choiced then enable nextButton
+  for (const option of options) {
+    option.addEventListener("change", () => {
+      console.log("changed");
+      nextButton.disabled = false; 
+    });
+  }
+
+  // on nextButton pressed
   nextButton.addEventListener("click", () =>
     onNextButton(questionsDiv, questions),
   );
