@@ -1,0 +1,47 @@
+body {
+  direction: rtl;
+  text-align: right;
+  margin: 5% 20%;
+}
+
+.quiz {
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  height: 60vh;
+  border: 2px solid black;
+  border-radius: 15px;
+  flex-direction: column;
+  gap: 1em;
+}
+
+#questions {
+  margin-right: 1em;
+}
+
+#next-button {
+  width: 15em;
+  margin-right: 1em;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
+
+/* options for a question */
+.option {
+  margin-top: 1.5em;
+  margin-left: 1em;
+}
+
+/* .option p { */
+/*   direction: rtl; */
+/*   text-align: left; */
+/* } */
+
+
+

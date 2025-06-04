@@ -1,21 +1,23 @@
-/* TODO :: Disable next button if user not choiced any option.
- * TODO :: Check user answer with correct answer
- * TODO :: Create scoring system and page.
- * TODO :: Add mechanizim to show if the selected value was correct or not.
+/* [x]TODO :: Disable next button if user not choiced any option.
+ * [x]TODO :: Check user answer with correct answer
+ * [x]TODO :: Create scoring system and page.
+ * [x]TODO :: Add mechanizim to show if the selected value was correct or not.
  */
-
 
 // Questin index to show in html page
 let questionIndex = 0;
-let score = 0;
+let correct = 0; // number of correct answers
+let incorrect = 0; // number of incorrect answers
+let correctPercent = 0; // Percentages of correct answers
+let numberOfQuestions = 0;
 
-// Create 4 multi choice option out a question object
+// Create 4 multi choice option out of the question object
 function createOptions(options) {
   let optionsHtml = "";
   for (const option of options) {
     optionsHtml += `
     <label>
-       <input type="radio" class="option" name="option" value="${option}">${option}
+       <input type="radio" class="option" name="option" value="${option}"><span dir="auto">${option}</span>
      </label><br>
     `;
   }
@@ -44,6 +46,8 @@ function createAllQuestions() {
     let question = createQuestion(questionObj);
     questions.push(question);
   }
+  // Store length of questions to use in showTestResult.
+  numberOfQuestions = questions.length;
   return questions;
 }
 
@@ -55,8 +59,7 @@ function showNextQuestion(questionsDiv, questions) {
 // Get value of selected radio button.
 function getSelectedValue(options) {
   for (const option of options) {
-    if (option.checked)
-      return option.value;
+    if (option.checked) return option.value;
   }
 }
 
@@ -67,15 +70,32 @@ function getCorrectAnswer() {
   return currentQuestion.answer;
 }
 
+// Number of incorrect answers
+// Number of correct answers
 function calculateScore(selectedValue, correctAnswer) {
-  if (selectedValue == correctAnswer)
-    score += 1
+  if (selectedValue == correctAnswer) {
+    correct++;
+  } else {
+    incorrect++;
+  }
 }
 
-function showTestResult() {}
+function showTestResult() {
+  // Success Precentages
+  correctPercent = (correct / numberOfQuestions) * 100;
+  console.log(`
+    Number of correct answers: ${correct}\n
+    Number of Incorrect answers: ${incorrect}\n
+    Correct percentages: ${correctPercent}
+  `);
+  const nextButton = document.getElementById("next-button");
+  nextButton.disabled = true;
+}
 
 // event handler when user clicked on nextButton in the html page
 function onNextButton(questionsDiv, questions) {
+  const nextButton = document.getElementById("next-button");
+  nextButton.disabled = true;
   const options = questionsDiv.querySelectorAll(".option");
   const selectedValue = getSelectedValue(options);
   const correctAnswer = getCorrectAnswer();
@@ -84,14 +104,13 @@ function onNextButton(questionsDiv, questions) {
   calculateScore(selectedValue, correctAnswer);
 
   // if there is question show next question
-  if (questionIndex < questionObjects.length){
+  if (questionIndex < questionObjects.length) {
     showNextQuestion(questionsDiv, questions);
-    console.log(score);
   }
   // show test result
   else {
+    showTestResult();
   }
-
 }
 
 // starting point of the script.
@@ -114,7 +133,7 @@ function main() {
   for (const option of options) {
     option.addEventListener("change", () => {
       console.log("changed");
-      nextButton.disabled = false; 
+      nextButton.disabled = false;
     });
   }
 
