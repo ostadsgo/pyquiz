@@ -1,47 +1,65 @@
+/* 
+ * [x] TODO :: Add and load `Vazir` and `Source Code Pro` fonts
+ *
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   direction: rtl;
   text-align: right;
-  margin: 5% 20%;
 }
 
-.quiz {
-  display: flex;
-  justify-content: center;
-  align-items: top;
-  height: 60vh;
-  border: 2px solid black;
-  border-radius: 15px;
-  flex-direction: column;
-  gap: 1em;
+code {
+  direction: ltr;
+  text-align: left;
+  font-family: "Source Code Pro";
 }
 
-#questions {
-  margin-right: 1em;
+.container {
+    /* margin: 5% 10%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /* width: 100%; */
+    gap: 5rem;
+    border: 1px solid red;
 }
 
-#next-button {
-  width: 15em;
-  margin-right: 1em;
+ 
+#quiz {
+    border: 1px solid blue;
+    padding: 10px;
+    width: 650px;
+    height: 450px;
+
 }
 
-.correct {
-  color: green;
+.question-code {
+  direction: ltr;
+  text-align: left;
+  border: 1px solid green;
 }
 
-.incorrect {
-  color: red;
-}
-
-/* options for a question */
 .option {
-  margin-top: 1.5em;
-  margin-left: 1em;
+  border: 1px solid red;
+  padding: 5px 10px;
+  margin-top: 5px;
+  cursor: pointer;
 }
 
-/* .option p { */
-/*   direction: rtl; */
-/*   text-align: left; */
-/* } */
+.option input[type="radio"] {
+    margin-left: 10px;
+}
 
-
-
+.result {
+    border: 1px solid black;
+    min-height: 100px;
+}

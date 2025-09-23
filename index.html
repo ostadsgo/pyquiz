@@ -1,20 +1,21 @@
 <!doctype html>
-<html>
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link type="text/css" rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="questions.js" defer></script>
-    <script type="text/javascript" src="./app.js" defer></script>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+    <script type="module" src="./app.js" defer></script>
     <title>سوالات پایتونی</title>
   </head>
   <body>
-    <h1>سوالات پایتونی</h1>
-    <div class="quiz">
-      <div id="questions"></div>
-      <input type="button" value="بعدی" id="next-button" />
-      <p id="message"></p>
+    <div class="container">
+      <div id="quiz">
+        <input type="button" value="بعدی" id="next-button" />
+        <p id="message"></p>
+      </div>
+      <div class="result">
+        <p>result stuff</p>
+      </div>
     </div>
-    <!-- end of quiz-continer -->
   </body>
 </html>

@@ -1,4 +1,4 @@
-let questionObjects = [
+export let questionObjects = [
   {
     title: "کدام یک از گزینه های زیر نام مجاز برای متغیر می باشد؟",
     code: "",
@@ -11,8 +11,8 @@ let questionObjects = [
     code: "",
     options: [
       "appcosts = appcosts + 6.99",
-      "appcosts + 6.99 = appcosts",
-      "app_costs += 6.99",
+      "appcosts = appcosts + 6.99",
+      "appcosts += 6.99",
       "هیچ کدام",
     ],
     answer: "appcosts + 6.99 = appcosts",
