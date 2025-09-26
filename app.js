@@ -10,17 +10,17 @@ import { questionObjects } from "./questions.js";
 
 let print = console.log;
 
-// -----------------------------------------------
-//  Data Prep
-// -----------------------------------------------
 // Questin index to show in html page
 let questionIndex = 0;
 let correct = 0; // number of correct answers
 let incorrect = 0; // number of incorrect answers
 let correctPercent = 0; // Percentages of correct answers
-let numberOfQuestions = 0;
+let totalQuestions = 0;
 let questions = [];
 
+// -----------------------------------------------
+//  Data Prep
+// -----------------------------------------------
 // Create 4 multi choice option out of the question object
 function createOptions(options) {
     let optionsHtml = "";
@@ -52,21 +52,38 @@ function createQuestion(question) {
 function createAllQuestions() {
     // An array contain all question which are representable
     // in html page.
-    let questions = [];
     for (const questionObj of questionObjects) {
         // get a question
         let question = createQuestion(questionObj);
         questions.push(question);
     }
     // Store length of questions to use in showTestResult.
-    numberOfQuestions = questions.length;
+    totalQuestions = questions.length;
     return questions;
+}
+
+// Return current question object 
+function getCurrentQuestion() {
+    return questionObjects[questionIndex];
+}
+
+// Return answer value from current question object
+function getCorrectAnswer() {
+    return getCurrentQuestion().answer;
 }
 
 // -----------------------------------------------
 //  Result update
 // -----------------------------------------------
-
+function checkAnswer(userAnswer) {
+    if (userAnswer == getCorrectAnswer()) correct++;
+    else incorrect ++;
+    let questionsLeft = totalQuestions - questionIndex;
+    document.getElementById("questionsLeft").innerHTML = questionsLeft;
+    document.getElementById("correct").innerHTML = correct;
+    document.getElementById("incorrect").innerHTML = incorrect;
+    // document.getElementById("correctPre").innerHTML = (correct / totalQuestions) * 100;
+}
 
 // -----------------------------------------------
 //  Load questions
@@ -79,8 +96,12 @@ function onOptionSelection() {
 
     // Load new question when user choice an option for current question.
     for (const option of options) {
-        option.addEventListener("change", () => {
+        option.addEventListener("change", (event) => {
+
+            // Check user selected value against correct answer
+            checkAnswer(event.target.value);
             showNextQuestion(quizDiv);
+
         });
     }
 }
@@ -105,6 +126,7 @@ function init() {
     // Show first question
     showQuestion();
 
+    // TODO: Fill informative part
 }
 
 document.addEventListener('DOMContentLoaded', init);
